@@ -1,6 +1,7 @@
-
+import random
 passwords = []    #calling all variables
 usernames = []
+users = [["tward", "noonewillguessthis"], ["thomash", "nice"], ["Kentyboy", "Iamamazing"]]
 Dice1 = 0
 Dice2 = 0
 Dice3 = 0
@@ -10,58 +11,65 @@ Dice1e = 0
 Dice2e = 0
 winningScore = 0
 saveScore = 0
-import random
 number = 2
 attempts = 0
 number2 = 2
 attempts2 = 0
-times = -1
-times2 = -1
 name1 = ""
 name2 = ""
-#works out if it is odd even or double for player one (function)
-def oddEvenDouble1(Dice1, Dice2):
-    global total1
-    if Dice1 == Dice2:
-        print("You rolled a double that means you get to roll again")
-        Dice3 = random.randint(1,6)
-        print("you rolled a", Dice3)
-        total1 = total1 + Dice3
-        print(name1 + "’s score is", total1)
-    elif (Dice1 + Dice2)% 2 == 0:
-        print("You rolled an even number that means 10 is added to your score")
-        total1 = total1 + 10
-        print(name1 + "’s total is", total1)
-    else:
-        print("You rolled and odd number 5 is deducted")
-        total1 = total1 - 5
-        if total1 < 0:
-            total1 = 0
-        print(name1 + "’s score is", total1)
-
-#works out if it is odd even or double for player two (function)
-def oddEvenDouble2(Dice1, Dice2):
-    global total2
-    if Dice1 == Dice2:
-        print("You rolled a double that means you get to roll again")
-        Dice3 = random.randint(1,6)
-        print("you rolled a", Dice3)
-        total2 = total2 + Dice3
-        print(name2 + "’s score is", total2)
-    elif (Dice1 + Dice2)% 2 == 0:
-        print("You rolled an even number” that means 10 is added to your score")
-        total2 = total2 + 10
-        print(name2 + "’s total is", total2)
-    else:
-        print("you rolled and odd number 5 is deducted")
-        total2 = total2 - 5
-        if total2 < 0:
-            total2 = 0
-        print(name2 + "’s score is", total2)
-#follows the procedures if the scores are even (function)
-Even = True
+number = 3
+attempts = 0
+number2 = 2
+attempts2 = 0
+times2 = -1
+allowIn = False
 diceEven1 = 0
 diceEven2 = 0
+Even = True
+userEntry = ""
+found_Name = 0
+
+#works out if it is odd even or double for player one (function)
+
+def oddEvenDouble(Dice1, Dice2):
+    global total1
+    if p1 == True:
+        if Dice1 == Dice2:
+            print("You rolled a double that means you get to roll again")
+            Dice3 = random.randint(1,6)
+            print("you rolled a", Dice3)
+            total1 = total1 + Dice3
+            print(name1 + "’s score is", total1)
+        elif (Dice1 + Dice2)% 2 == 0:
+            print("You rolled an even number that means 10 is added to your score")
+            total1 = total1 + 10
+            print(name1 + "’s total is", total1)
+        else:
+            print("You rolled and odd number 5 is deducted")
+            total1 = total1 - 5
+            if total1 < 0:
+                total1 = 0
+            print(name1 + "’s score is", total1)
+    else:        
+        global total2
+        if Dice1 == Dice2:
+            print("You rolled a double that means you get to roll again")
+            Dice3 = random.randint(1,6)
+            print("you rolled a", Dice3)
+            total2 = total2 + Dice3
+            print(name2 + "’s score is", total2)
+        elif (Dice1 + Dice2)% 2 == 0:
+            print("You rolled an even number” that means 10 is added to your score")
+            total2 = total2 + 10
+            print(name2 + "’s total is", total2)
+        else:
+            print("you rolled and odd number 5 is deducted")
+            total2 = total2 - 5
+            if total2 < 0:
+                total2 = 0
+            print(name2 + "’s score is", total2)
+
+        #follows the procedures if the scores are even (function)
 
 def even(diceEven1, diceEven2):
     global Even
@@ -85,22 +93,8 @@ def even(diceEven1, diceEven2):
         else:
             Even = True
 
-#password entry for player1
-
-users = [["tward", "noonewillguessthis"], ["thomash", "nice"], ["Kentyboy", "Iamamazing"]]
-
-
-number = 3
-attempts = 0
-number2 = 2
-attempts2 = 0
-times2 = -1
-allowIn = False
-
 #password login for p1
 
-userEntry = ""
-found_Name = 0
 while userEntry == "":
     userEntry = input("Player1 please enter your user name")
     userLen = len(users)
@@ -125,13 +119,13 @@ while userEntry == "":
         print("User name not recognised")
         userEntry = ""
 print("Details correct you can play")
+
 #Password login for p2
+
 number = 2
 attempts = 0
 number2 = 2
 attempts2 = 0
-times = -1
-times2 = -1
 allowIn = False
 
 userEntry = ""
@@ -165,6 +159,7 @@ print("Details correct you can play")
 
 print("The game is simple, 2 players take turns to roll two dice each, if an even number is rolled when the two die are added up 10 is added to the players score, if odd 5 is subtracted, if you roll a double you get to roll again. This continues for 5 rounds")
 for i in range(0,5):
+    p1 = True
     input(name1 + " press enter to roll")
     print("")
     Dice1 =  random.randint(1,6)
@@ -172,9 +167,10 @@ for i in range(0,5):
     print("your two die are", Dice1,"and",Dice2)
     print("")
     total1 = total1 + (Dice1 + Dice2)
-    oddEvenDouble1(Dice1, Dice2)
+    oddEvenDouble(Dice1, Dice2)
     Dice1 = 0
     Dice2 = 0
+    p1 = False
     split = input(name2 + " press enter to roll")
     print("")
     Dice1 =  random.randint(1,6)
@@ -182,8 +178,8 @@ for i in range(0,5):
     print("your two die are", Dice1,"and",Dice2)
     print("")
     total2 = total2 + (Dice1 + Dice2)
-    oddEvenDouble2(Dice1, Dice2)
-    print(name2 + "'s score is", total1)
+    oddEvenDouble(Dice1, Dice2)
+    print(name1 + "'s score is", total1)
    
 if total1 > total2:
     print(name1 + " is the winner")
@@ -198,18 +194,19 @@ else:
 
 saveName = input("Please enter the name you want on the leader board").title()
 saveScore = winningScore
-
 textFile = open("highscores.txt", "a")
 textFile.write(str(saveScore) + ' ' + saveName + "\n")
 textFile.close()
-
 print ("\n")
 textFile = open("highscores.txt", "r")
 wholeThing = textFile.read().splitlines()
 
 #prints out top 5
+
 temp = 0
 n = len(wholeThing)
+
+#bubble sort
 
 counter = 0
 swapped  = True
@@ -226,7 +223,6 @@ c = len(wholeThing) - 1
 s = 1
 print("These are the top 5 highest scores")
 for z in range(0,5):
-
     print(s,"-", wholeThing[c])
     c = c - 1
     s = s + 1
