@@ -9,11 +9,9 @@ total1 = 0
 total2 = 0
 Dice1e = 0
 Dice2e = 0
-winningScore = 0
-saveScore = 0
-number = 2
+winning_score = 0
+save_score = 0
 attempts = 0
-number2 = 2
 attempts2 = 0
 name1 = ""
 name2 = ""
@@ -22,16 +20,16 @@ attempts = 0
 number2 = 2
 attempts2 = 0
 times2 = -1
-allowIn = False
-diceEven1 = 0
-diceEven2 = 0
+allow_in = False
+dice_even1 = 0
+dice_even2 = 0
 Even = True
-userEntry = ""
+user_entry = ""
 found_Name = 0
 
 #works out if it is odd even or double for player one (function)
 
-def oddEvenDouble(Dice1, Dice2):
+def odd_even_double(Dice1, Dice2):
     global total1
     if p1 == True:
         if Dice1 == Dice2:
@@ -71,43 +69,44 @@ def oddEvenDouble(Dice1, Dice2):
 
         #follows the procedures if the scores are even (function)
 
-def even(diceEven1, diceEven2):
+def even(dice_even1, dice_even2):
     global Even
-    global winningScore
+    global winning_score
     print("the scores are even, you must each roll a dice to see who is the winner")
     while Even == True:
-        diceEven1 = random.randint(1,6)
+        dice_even1 = random.randint(1,6)
+        dice_even2 = random.randint(1,6)
         input(name1 + " press enter to roll")
-        print(diceEven1)
-        diceEven2 = random.randint(1,6)
+        print(dice_even1)
+        dice_even2 = random.randint(1,6)
         input(name2 + " press enter to roll")
-        print(diceEven2)
-        if diceEven1 > diceEven2:
+        print(dice_even2)
+        if dice_even1 > dice_even2:
             print(name1 + " wins")
-            winningScore = winningScore + total1 + diceEven1
+            winning_score = winning_score + total1 + dice_even1
             Even = False
-        elif diceEven2 > diceEven1:
+        elif dice_even2 > dice_even1:
             print(name2 + " wins")
-            winningScore = winningScore + total1 + diceEven1
+            winning_score = winning_score + total1 + dice_even1
             Even = False
         else:
             Even = True
 
 #password login for p1
 
-while userEntry == "":
-    userEntry = input("Player1 please enter your user name")
-    userLen = len(users)
-    for i in range(0, userLen):
-        if userEntry == users[i][0]:
+while user_entry == "":
+    user_entry = input("Player1 please enter your user name")
+    user_len = len(users)
+    for i in range(0, user_len):
+        if user_entry == users[i][0]:
             found_Name = 1
-            name1 = userEntry
-            while attempts < 3 and allowIn == False:
+            name1 = user_entry
+            while attempts < 3 and allow_in == False:
                 number = number -1
-                passwordEntry = input("Please enter your password")
-                if passwordEntry == users[i][1]:
+                password_entry = input("Please enter your password")
+                if password_entry == users[i][1]:
                     print("Username and password are correct, you may play the game")
-                    allowIn = True
+                    allow_in = True
                 else:
                     print("Sorry, the password is incorrect")
                     print("attempts remaining", number)
@@ -117,7 +116,7 @@ while userEntry == "":
 
     if found_Name == 0:
         print("User name not recognised")
-        userEntry = ""
+        user_entry = ""
 print("Details correct you can play")
 
 #Password login for p2
@@ -126,23 +125,23 @@ number = 2
 attempts = 0
 number2 = 2
 attempts2 = 0
-allowIn = False
+allow_in = False
 
-userEntry = ""
+user_entry = ""
 found_Name = 0
-while userEntry == "":
-    userEntry = input("Player2 please enter your user name")
-    userLen = len(users)
-    for i in range(0, userLen):
-        if userEntry == users[i][0]:
+while user_entry == "":
+    user_entry = input("Player2 please enter your user name")
+    user_len = len(users)
+    for i in range(0, user_len):
+        if user_entry == users[i][0]:
             found_Name = 1
-            name2 = userEntry
-            while attempts < 3 and allowIn == False:
+            name2 = user_entry
+            while attempts < 3 and allow_in == False:
                 number = number -1
-                passwordEntry = input("Please enter your password")
-                if passwordEntry == users[i][1]:
+                password_entry = input("Please enter your password")
+                if password_entry == users[i][1]:
                     print("Username and password are correct, you may play the game")
-                    allowIn = True
+                    allow_in = True
                 else:
                     print("Sorry, the password is incorrect")
                     print("attempts remaining", number)
@@ -152,7 +151,7 @@ while userEntry == "":
 
     if found_Name == 0:
         print("User name not recognised")
-        userEntry = ""
+        user_entry = ""
 print("Details correct you can play")
 
 #main part of the game
@@ -167,7 +166,7 @@ for i in range(0,5):
     print("your two die are", Dice1,"and",Dice2)
     print("")
     total1 = total1 + (Dice1 + Dice2)
-    oddEvenDouble(Dice1, Dice2)
+    odd_even_double(Dice1, Dice2)
     Dice1 = 0
     Dice2 = 0
     p1 = False
@@ -178,33 +177,33 @@ for i in range(0,5):
     print("your two die are", Dice1,"and",Dice2)
     print("")
     total2 = total2 + (Dice1 + Dice2)
-    oddEvenDouble(Dice1, Dice2)
+    odd_even_double(Dice1, Dice2)
     print(name1 + "'s score is", total1)
    
 if total1 > total2:
     print(name1 + " is the winner")
-    winningScore = winningScore + total1
+    winning_score = winning_score + total1
 elif total2 > total1:
     print(name2 + " is the winner")
-    winningScore = winningScore + total2
+    winning_score = winning_score + total2
 else:
-    even(diceEven1, diceEven2)
+    even(dice_even1, dice_even2)
 
 #adds winning score to list
 
-saveName = input("Please enter the name you want on the leader board").title()
-saveScore = winningScore
-textFile = open("highscores.txt", "a")
-textFile.write(str(saveScore) + ' ' + saveName + "\n")
-textFile.close()
+save_name = input("Please enter the name you want on the leader board").title()
+save_score = winning_score
+text_file = open("highscores.txt", "a")
+text_file.write(str(save_score) + ' ' + save_name + "\n")
+text_file.close()
 print ("\n")
-textFile = open("highscores.txt", "r")
-wholeThing = textFile.read().splitlines()
+text_file = open("highscores.txt", "r")
+whole_thing = text_file.read().splitlines()
 
 #prints out top 5
 
 temp = 0
-n = len(wholeThing)
+n = len(whole_thing)
 
 #bubble sort
 
@@ -213,17 +212,17 @@ swapped  = True
 while swapped == True:
     swapped = False
     for x in range(1,n):
-        if wholeThing[x-1] > wholeThing[x]:
-            temp = wholeThing[x-1]
-            wholeThing[x-1] = wholeThing[x]
-            wholeThing[x] = temp
+        if whole_thing[x-1] > whole_thing[x]:
+            temp = whole_thing[x-1]
+            whole_thing[x-1] = whole_thing[x]
+            whole_thing[x] = temp
             swapped = True
 
-c = len(wholeThing) - 1
+c = len(whole_thing) - 1
 s = 1
 print("These are the top 5 highest scores")
 for z in range(0,5):
-    print(s,"-", wholeThing[c])
+    print(s,"-", whole_thing[c])
     c = c - 1
     s = s + 1
-textFile.close()
+text_file.close()
